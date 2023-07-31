@@ -1,9 +1,7 @@
 package io.rocketbase.toggl.report;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import java.util.Base64;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -19,7 +17,6 @@ public class RequestContext {
 
     private static long lastCall;
     private final TogglReportApiBuilder apiBuilder;
-    private HttpClient httpClient;
     private ClientHttpRequestFactory requestFactory;
     private RestTemplate restTemplate;
     private String basicAuth = null;
@@ -27,10 +24,7 @@ public class RequestContext {
 
     RequestContext(TogglReportApiBuilder apiBuilder) {
         this.apiBuilder = apiBuilder;
-
-        this.httpClient = HttpClientBuilder.create()
-                .build();
-        this.requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+        this.requestFactory = new HttpComponentsClientHttpRequestFactory();
         restTemplate = new RestTemplate(requestFactory);
         restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter(getObjectMapper())));
     }
@@ -44,7 +38,7 @@ public class RequestContext {
     protected String getBasicAuth() {
         if (basicAuth == null) {
             String auth = apiBuilder.getApiToken() + ":api_token";
-            basicAuth = new String(Base64.encodeBase64(auth.getBytes()));
+            basicAuth = Base64.getEncoder().encodeToString(auth.getBytes());
         }
         return basicAuth;
     }
