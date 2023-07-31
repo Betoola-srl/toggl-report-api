@@ -30,7 +30,7 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:rocketbase-io/toggl-report-api.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:Betoola-srl/toggl-report-api.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
