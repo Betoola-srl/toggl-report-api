@@ -37,14 +37,9 @@ public class RestUriBuilder {
     }
 
     public RestUriBuilder addParameter(String key, Object value) {
-        return addParameters(key, Collections.singletonList(value));
-    }
-
-    public RestUriBuilder addParameters(String key, Collection<? extends Object> value) {
         Objects.nonNull(key);
         Objects.nonNull(value);
-        this.parameters.putIfAbsent(key, new ArrayList<>());
-        this.parameters.get(key).addAll(value);
+        this.parameters.put(key, List.of(value));
         return this;
     }
 

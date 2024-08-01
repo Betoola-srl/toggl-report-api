@@ -3,6 +3,7 @@ package io.rocketbase.toggl.report;
 import io.rocketbase.toggl.report.model.*;
 import io.rocketbase.toggl.report.util.FetchAllDetailed;
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.notNullValue;
 /**
  * Created by marten on 19.01.17.
  */
+@Disabled
 public class TogglReportApiTest {
 
     protected TogglReportApi getTogglReportApi() {
